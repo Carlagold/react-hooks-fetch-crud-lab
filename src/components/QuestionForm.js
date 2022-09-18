@@ -19,8 +19,27 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
-  }
+    // console.log(formData); Remove the console * POST /questions
+// When the user clicks the 'New Question' button, a form will be displayed for creating a new question. 
+// This form is already set up as a controlled form, so your responsibility 
+// will be to send this form data to our API when the form is submitted. 
+fetch("http://localhost:4000/questions", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    prompt: formData.prompt,
+    answers: [
+      formData.answer1,
+      formData.answer2,
+      formData.answer3,
+      formData.answer4,
+    ],
+    correctIndex: parseInt(formData.correctIndex),
+  }),
+});
+}
 
   return (
     <section>
